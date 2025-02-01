@@ -1,0 +1,71 @@
+*****COLOR SENSOR*****
+
+Exact Model: TCS230/TCS3200 Color Sensor
+Link to sources: 
+https://lastminuteengineers.com/tcs230-tcs3200-color-sensor-arduino-tutorial/#google_vignette
+https://randomnerdtutorials.com/arduino-color-sensor-tcs230-tcs3200/
+
+The sensor has for main colours: Red, Green, Blue, White
+
+The pin order to activate and read the data from the photodiode sensors
+are as follows:
+Colour	|	S2	|	S3
+Red		LOW		LOW
+Blue		LOW		HIGH
+Clear		HIGH		LOW
+Green		HIGH		HIGH
+
+The sensor also has four more control pins to control the output
+frequency (i.e. the light sensitivity):
+Output Frequency |	S0	|	S1
+Power down(OFF)		LOW		LOW
+2%			LOW		HIGH
+20%			HIGH		LOW
+100%			HIGH		HIGH
+Most applications use 20% scaling, the output frequency ranges usually
+from 2
+
+INTERPRETING THE OUTPUT
+The scaling factor scales the return baud rate by the percentage
+e.g. input baud rate == 9600
+output frequency: baud rate == 1600	Output range is (0-1600)
+
+NOTE:
+OUTPUT VALUES ARE INVERTED
+1600 - 'absence' of __x__ light
+0 - 'precense' of __x__ light
+
+e.g. 
+R=1179 G=719 B=223
+i.e. there is a absence of red, absence of green, and presence of blue
+Most likely colour: BLUE
+
+NOTE: The stronger the light source, the less dispersion on the three
+colour values.
+
+PIN SETUP
+// TCS230 or TCS3200 pins wiring to Arduino
+#define S0 4
+#define S1 5
+#define S2 6
+#define S3 7
+#define sensorOut 8
+
+note the PIN MODES should be activated as follows:
+pinMode(S0, OUTPUT)
+pinMode(S1, OUTPUT)
+pinMode(S2, OUTPUT)
+pinMode(S3, OUTPUT)
+pinMode(sensorOut, INPUT)
+
+IMPORTANT FUNCTIONS
+void digitalwrite(__pin__, __mode__) 
+	USED TO CHANGE the COLOUR read
+
+int pulseIn(__input__, LOW)
+	USE to return the sensed input
+	
+int map(__raw_input__, __rawMax__, __rawMin__, __mappedMax__, __mappedMin__)
+converts the raw input to be proportionally converted as follows:
+raw max --> mapped max
+raw min --> mapped min
