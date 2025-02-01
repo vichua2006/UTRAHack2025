@@ -69,3 +69,64 @@ int map(__raw_input__, __rawMax__, __rawMin__, __mappedMax__, __mappedMin__)
 converts the raw input to be proportionally converted as follows:
 raw max --> mapped max
 raw min --> mapped min
+
+
+ULTRASONIC SENSOR
+
+Exact Model: Ultrasonic Ranging Module HC-SR04
+Links to sources:
+https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf?_gl=1*173x7lj*_ga*Mjg0NzcyNTQ1LjE3MDU1MzczOTU.*_ga_T369JS7J9N*MTcwNTUzNzM5NS4xLjAuMTcwNTUzNzM5NS42MC4wLjA.
+https://www.instructables.com/Simple-Arduino-and-HC-SR04-Example/
+
+
+Key parameters:
+Voltage: 	  5	V DC
+Current:  	 15	mA
+Frequency:  	 40 	Hz
+Max Range: 	400 	cm
+Min Range:   	  2 	cm
+Measuring angle: 15	degrees
+Trigger signal:	 10	uS TTL pulse
+Echo output:	 Range-modified by input lever signal
+Accuracy:	  0.3	cm
+
+CONNECT THE GROUND TO the module before connecting the power connection.
+Failure to do so may result in damage.
+
+CONNECT:
+VCC to 5V power source
+TRIG to the output trigger source (pin 13 in example)
+ECHO to the arduino input pin (pin 12 in example)
+GND to the general ground <-- CONNECT FIRST
+
+to obtain data, you need to find the time interval between the trigger signal
+and the receiving signal. The formula is uS / 58 for centimeters or 
+uS / 148 for inches. Apply at LEAST a 60ms delay interval to prevent
+signal interference.
+or time * velocity / 2, given correct units for time and speed of sound,
+which is 340 m/s by default
+
+Operation: ultrasound signal is an 8 cycle burst at 40kHz.
+
+INSTRUCTIONS TO OPERATE:
+THE FOLLOWING CODE MUST BE USED IN SUCCESSION FOR THE SIGNAL TO WORK
+
+TO GET A PING:
+
+	digitalWrite(trigPin, LOW);
+	delayMicroseconds(2); //use to clear/reset sensor
+	digitalWrite(trigPin, HIGH);
+	delayMicroseconds(10); //sends 10 uS trig pulse
+	digitalWrite(trigPin, LOW); 
+	long duration = pulseIn(echoPin, HIGH); //returns time interval for the signal to be returned
+	long distance = duration / 58; //returns distance in CENTIMETERS
+	//use duration / 148 to get inches
+
+
+Sample setup:
+#define trigPin 13
+#define echoPin 12
+
+pinMode(trigPin, OUTPUT);
+pinMode(echoPin, INPUT);
+
