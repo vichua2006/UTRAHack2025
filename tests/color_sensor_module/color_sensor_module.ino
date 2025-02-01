@@ -1,9 +1,15 @@
-#define  s0 8       //Module pins wiring
-#define s1 9
-#define s2 10
-#define s3 11
-#define  out 12
+
+// PINS:
+#define  s0 8 // 8       //Module pins wiring
+#define s1 2 // 9
+#define s2 3 //10
+#define s3 4 //11 
+#define  out 13 //12
+
+// Sample count is the amount of samples to be averaged per sensor reading (used in getColor)
 #define SAMPLE_COUNT 10
+
+// Confidence threshold is the minimum confidence to categorize into a color
 #define CONFIDENCE_THRESHOLD 35
 
 enum color{
@@ -31,6 +37,7 @@ void loop()                  //Every 2s we select  a photodiodes set and read it
 }
 
 
+// Gets the raw sensor data. Samples is the amount of samples to be averaged per reading.
 int getData(int samples){
   int data = -1;
   for (int i = 0; i < samples; i++){
@@ -40,6 +47,7 @@ int getData(int samples){
   return data/samples;
 }
 
+// Produces the color detected as a color enum.
 enum color getColor(){
    digitalWrite(s2,LOW);        //S2/S3  levels define which set of photodiodes we are using LOW/LOW is for RED LOW/HIGH  is for Blue and HIGH/HIGH is for green
    digitalWrite(s3,LOW);
@@ -71,6 +79,8 @@ enum color getColor(){
    else return error;
 }
 
+
+// Given a color enum, it produces the corresponding string equivalent of the color.
 String getEnumColor(enum color c) 
 {
    switch (c) 
@@ -82,6 +92,8 @@ String getEnumColor(enum color c)
    }
 }
 
+
+// Returns true if Red|Green|Blue has been detected.
 bool isColorFound(){
   enum color result = getColor();
   return (result == red || result == green || result == blue);
