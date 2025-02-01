@@ -1,59 +1,19 @@
-bool isColorFound()
-{
-  // Return true if a color is found
-  return true;
-}
-
-Color getColor()
-{
-  // Return the color that is found
-  return Color::RED;
-}
-
-void driveMotor(int leftSpeed, int rightSpeed)
-{
-  // Drive the robot
-}
-
-enum class Color {
-  RED,
-  GREEN,
-  BLUE,
-  NONE
-};
-
 enum class ChallengeOneState
 {
-  SPIRAL_SEARCH,
+  TARGET_SEARCH,
   FIND_CENTER_ANGLE,
   MOVE_TO_CENTER,
+  DONE
 };
 
-int radius = 1;
-int angle = 0;
-const int baseSpiralSpeed = 10;
-
-ChallengeOneState challengeOneState = ChallengeOneState::SPIRAL_SEARCH;
+ChallengeOneState challengeOneState = ChallengeOneState::TARGET_SEARCH;
 
 void challengeOne()
 {
   switch (challengeOneState)
   {
-    case ChallengeOneState::SPIRAL_SEARCH:
-      // Increase the radius every full rotation
-      if (angle >= 360)
-      {
-        radius += 5;
-        angle = 0;
-      }
-
-      // Drive the robot in a spiral pattern
-      driveMotor(baseSpiralSpeed - (baseSpiralSpeed / radius), baseSpiralSpeed);
-
-      // Increment the angle for the next iteration
-      angle += 10;
-
-      delay(100);
+    case ChallengeOneState::TARGET_SEARCH:
+      driveMotor(10, 10);
 
       if(isColorFound())
       {
@@ -73,27 +33,56 @@ void challengeOne()
       Color currentColor = getColor();
 
       while(colorChanges < 3) {
-        while(getColor() == currentColor) {
-          driveMotor(5, -5);
+        driveMotor(5, -5);
+        while(getColor() == currentColor) {}
+
+        if(colorChanges == 1) {
+          timestampOne = millis() - startTime;
+        } else if(colorChanges == 2) {
+          timestampTwo = millis() - startTime;
         }
 
-        if(colorChanges == 0) {
-          timestampOne = millis();
-        } else if(colorChanges == 1) {
-          timestampTwo = millis();
-        }
-
+        currentColor = getColor();
         colorChanges++;
       }
 
-      // Calculate the center angle
-      int centerAngle = (timestampOne - timestampTwo) / 2;
+      driveMotor(0, 0);
 
-      // Move to face the center
+      // Calculate the center angle
+      int centerTime = (timestampTwo - timestampOne) / 2;
+      
+      startTime = millis();
+
+      while(millis() - startTime < centerTime) {
+        driveMotor(-5, 5);
+      }
+
+      driveMotor(0, 0);
+
+      challengeOneState = ChallengeOneState::MOVE_TO_CENTER;
       break;
     case ChallengeOneState::MOVE_TO_CENTER:
       // Move towards and stop at the center
-      // TODO: Implement this state
+      driveMotor(10, 10);
+
+      int colorChanges = 0;
+
+      Color currentColor = getColor();
+
+      while(colorChanges < 4) {
+        while(getColor() == currentColor) {}
+
+        currentColor = getColor();
+        colorChanges++;
+      }
+
+      driveMotor(0, 0);
+
+      challengeOneState = ChallengeOneState::DONE;
+      break;
+    case ChallengeOneState::DONE:
+      // Stop the robot
+      driveMotor(0, 0);
       break;
   }
 }
