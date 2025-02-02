@@ -77,12 +77,12 @@ void reverse(){
 
 void drive_slow(char direction) {
   if (direction == 'L') {
-    driveMotor(-40, 40);
+    driveMotor(-1 * SET_SPEED * 3 / 4, SET_SPEED * 3 / 4);
     delay(100);
     driveMotor(0,0);
   }
   else if (direction == 'R') {
-    driveMotor(40, -40);
+    driveMotor(SET_SPEED * 3 / 4, -1 * SET_SPEED * 3 / 4);
     delay(100);
     driveMotor(0,0);
   }
