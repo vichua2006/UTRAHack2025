@@ -60,6 +60,8 @@ void setup() {
   pinMode(COLOR_S2, OUTPUT);
   pinMode(COLOR_S3, OUTPUT);
   pinMode(COLOR_OUT, INPUT);
+  pinMode(TRIGGER_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
 
   Serial.begin(9600); // intialize the serial monitor baud rate
 
@@ -72,4 +74,5 @@ void setup() {
 
 void loop() {
     Serial.println(getEnumColor(getColor()));
+    delay(10);
 }
