@@ -39,8 +39,8 @@ void driveMotor(int speedA, int speedB)
         digitalWrite(in4, LOW);
     }
 
-    analogWrite(enL, pwmA * modifierL);
-    analogWrite(enR, pwmB * modifierR);
+    analogWrite(enL, pwmA * tunableModifierL);
+    analogWrite(enR, pwmB * tunableModifierR);
 }
 
 void turnRight()

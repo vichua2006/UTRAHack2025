@@ -52,7 +52,7 @@
 #define TURN_SPEED 30
 
 // time it takes to turn 90 degrees
-#define quarterPiTime 437 // 570
+#define quarterPiTime 375 // 570 || 437 ||||||||| C2: 470
 
 // ULTRASONIC SENSOR
 
@@ -70,10 +70,11 @@ enum Challenge
   ONE,
   TWO,
   THREE,
-  TEST
+  TEST,
+  CHAR
 };
 
-const Challenge currentChallenge = TWO;
+const Challenge currentChallenge = CHAR;
 
 enum color
 {
@@ -83,7 +84,8 @@ enum color
   error
 };
 
-enum turn {
+enum turn
+{
   straight,
   left,
   right,
@@ -118,7 +120,7 @@ void setup()
 
   setupServo();
   defaultGripper();
-  
+
   delay(2000);
 }
 
@@ -128,18 +130,22 @@ void loop()
   // Serial.print("Dist FROM MAIN: ");
   // Serial.println(getDistance());
 
-  switch(currentChallenge) {
-    case Challenge::ONE:
-      challengeOne();
-      break;
-    case Challenge::TWO:
-      challengeTwo(1);
-      break;
-    case Challenge::THREE:
-      // challengeThree();
-      break;
-    case Challenge::TEST:
-      testCode();
-      break;
+  switch (currentChallenge)
+  {
+  case Challenge::ONE:
+    challengeOne();
+    break;
+  case Challenge::TWO:
+    challengeTwo(1);
+    break;
+  case Challenge::THREE:
+    // challengeThree();
+    break;
+  case Challenge::TEST:
+    testCode();
+    break;
+  case Challenge::CHAR:
+    characterize();
+    break;
   }
 }

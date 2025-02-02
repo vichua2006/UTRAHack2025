@@ -14,7 +14,20 @@ void setChallengeTwoState(enum ChallengeTwoState state);
 void setChallengeTwoState(enum ChallengeTwoState state) {
     challengeTwoState = state;
     Serial.print("State changed to: ");
-    Serial.println(challengeTwoState);
+    switch(state) {
+        case ChallengeTwoState::INIT:
+            Serial.println("INIT");
+            break;
+        case ChallengeTwoState::WAIT_FOR_WALL:
+            Serial.println("WAIT_FOR_WALL");
+            break;
+        case ChallengeTwoState::TURN_INSTRUCTION:
+            Serial.println("TURN_INSTRUCTION");
+            break;
+        case ChallengeTwoState::DONE:
+            Serial.println("DONE");
+            break;
+    }
 }
 
 void challengeTwo(int def) {
@@ -66,12 +79,12 @@ void challengeTwo(int def) {
                     break;
                 case error:
                     delay(1000);
+                    stop();
                     setChallengeTwoState(ChallengeTwoState::DONE);
                     break;
             }
             break;
         case ChallengeTwoState::DONE:
-            stop();
             break;
     }
 }

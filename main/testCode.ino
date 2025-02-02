@@ -4,6 +4,8 @@ void testCode() {
   // closeGripper();
   // delay(2000);
 
+  // turnInfinite();
+
   // for (int i = 0; i < 4; i++) {
   //   drive();
   //   delay(2000);
@@ -18,10 +20,12 @@ void testCode() {
   // openGripper();
   // delay(1000);
 
-  // turnRight();
-  // delay(1000);
-  // stop();
-  // delay(1000);
+  turnRight();
+  delay(1000);
+  stop();
+  delay(1000);
 
-  ledBlink();
+  // ledBlink();
+
+  // Serial.println(getDistance());
 }
