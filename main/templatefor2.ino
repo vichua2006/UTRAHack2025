@@ -11,15 +11,16 @@ int challengeTwo()
 
         float distance = getDistance();
         Serial.println(distance);
-
+        Serial.println(distance);
         if (distance < MIN_SONIC_DISTANCE)
         {
             Serial.println("stopped");
             reverse();
             //calibrate();
-            sweep_calibrate();
             delay(50);
             stop();
+            delay(1000);
+            if (CALIBRATION) sweep_calibrate();
             delay(2000);
             enum color currColor = getColor();
             Serial.println(getEnumColor(currColor));
@@ -54,8 +55,8 @@ int challengeTwo()
             else
             {
                 // continue straight
-                Serial.println("straight");
-                drive();
+                Serial.println("reached end");
+                stop();
                 delay(1000);
             }
         }

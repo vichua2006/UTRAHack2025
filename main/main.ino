@@ -22,7 +22,7 @@
 
 // ULTRASONIC CENTIMETER
 #define TRIGGER_PIN 5
-#define ECHO_PIN 10
+#define ECHO_PIN 6
 
 // SERVO
 #define SERVO_PIN 3
@@ -59,6 +59,8 @@
 
 #define ULTRA_SAMPLE_DELAY 20
 
+#define CALIBRATION true
+
 enum Challenge
 {
   ONE,
@@ -67,7 +69,7 @@ enum Challenge
   TEST
 };
 
-const Challenge currentChallenge = TEST;
+const Challenge currentChallenge = TWO;
 
 enum color
 {
@@ -114,14 +116,15 @@ void setup()
 
 void loop()
 {
-  Serial.println(getEnumColor(getColor()));
+  //Serial.println(getEnumColor(getColor()));
 
   switch(currentChallenge) {
     case Challenge::ONE:
       challengeOne();
       break;
     case Challenge::TWO:
-      // challengeTwo();
+      challengeTwo();
+      //Serial.println(getDistance());
       break;
     case Challenge::THREE:
       // challengeThree();
