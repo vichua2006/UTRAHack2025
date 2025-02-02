@@ -18,8 +18,10 @@ void testCode() {
   // openGripper();
   // delay(1000);
 
-  turnRight();
-  delay(1000);
-  stop();
-  delay(1000);
+  // turnRight();
+  // delay(1000);
+  // stop();
+  // delay(1000);
+
+  ledBlink();
 }

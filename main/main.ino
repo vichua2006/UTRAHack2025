@@ -27,6 +27,9 @@
 // SERVO
 #define SERVO_PIN 3
 
+// LED
+#define LED_PIN A2
+
 /****************************************************** PINS CONFIG END *************************************************************/
 
 // COLOR SENSOR CONFIG
@@ -70,7 +73,7 @@ enum Challenge
   TEST
 };
 
-const Challenge currentChallenge = ONE;
+const Challenge currentChallenge = TWO;
 
 enum color
 {
@@ -89,21 +92,26 @@ enum turn {
 
 void setup()
 {
+  Serial.begin(115200); // intialize the serial monitor baud rate
+
   pinMode(enL, OUTPUT);
   pinMode(in1, OUTPUT);
   pinMode(in2, OUTPUT);
   pinMode(enR, OUTPUT);
   pinMode(in3, OUTPUT);
   pinMode(in4, OUTPUT);
-  pinMode(COLOR_S0, OUTPUT); // pin modes
+
+  pinMode(COLOR_S0, OUTPUT);
   pinMode(COLOR_S1, OUTPUT);
   pinMode(COLOR_S2, OUTPUT);
   pinMode(COLOR_S3, OUTPUT);
   pinMode(COLOR_OUT, INPUT);
+
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 
-  Serial.begin(115200); // intialize the serial monitor baud rate
+  pinMode(LED_PIN, OUTPUT);
+  ledOff();
 
   digitalWrite(COLOR_S0, HIGH); // Putting S0/S1 on HIGH/HIGH levels means the output frequency scalling is at 100%  (recommended)
   digitalWrite(COLOR_S1, LOW);  // LOW/LOW is off HIGH/LOW is 20% and  LOW/HIGH is  2%
