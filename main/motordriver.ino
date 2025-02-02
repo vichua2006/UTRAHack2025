@@ -92,6 +92,23 @@ void drive_slow(char direction) {
   }
 }
 
+void drive_sweep(char direction) {
+  if (direction == 'L') {
+    driveMotor(-1 * SET_SPEED * 3 / 4, SET_SPEED * 3 / 4);
+    delay(500);
+    driveMotor(0,0);
+  }
+  else if (direction == 'R') {
+    driveMotor(SET_SPEED * 3 / 4, -1 * SET_SPEED * 3 / 4);
+    delay(500);
+    driveMotor(0,0);
+  }
+  else {
+    Serial.println("INVALID DIRECTION");
+    delay(200);
+  }
+}
+
 // example usage:
 // void loop() {
 //    // put your main code here, to run repeatedly:

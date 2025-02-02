@@ -44,12 +44,47 @@ bool getting_closer(char direction) {
 
 void calibrate() {
   char direction = 'L';
-  int switch_dir = 0;
   for (int i = 0; i < 10; i++) {
     if (!getting_closer(direction)) {
       if (direction == 'L') direction = 'R';
       else direction = 'L';
     }
+  }
+}
+
+float sweep() {
+  drive_sweep('L');
+  float min_dist = getDistance();
+  for (int i = 0; i < 12; i++) {
+    drive_slow('R');
+    float temp = getDistance();
+    if (temp < min_dist) {
+      min_dist = temp;
+    }
+  }
+  return min_dist;
+}
+
+char swap_direction(char direction) {
+  if (direction == 'R') return 'L';
+  else return 'R';
+}
+
+void sweep_calibrate() {
+  float target_dist = sweep() + 0.10;
+  float prev = getDistance();
+  float current;
+  char direction = 'L';
+  for (int i = 0; i < 10; i++) {
+    drive_slow(direction);
+    current = getDistance();
+    if (current < target_dist) {
+      break;
+    }
+    else if (current - prev > 0) {
+      direction = swap_direction(direction);
+    }
+    prev - current;
   }
 }
 
