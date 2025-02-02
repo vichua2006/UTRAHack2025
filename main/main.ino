@@ -1,3 +1,5 @@
+#include <Servo.h>
+
 // PINS:
 
 // COLOR SENSOR:
@@ -18,12 +20,9 @@
 #define in3 A0 // 11
 #define in4 A1 // 7
 
-#define quarterPiTime 660 // time it takes to turn 90 degrees
-
 // ULTRASONIC CENTIMETER
-
 #define TRIGGER_PIN 5
-#define ECHO_PIN 6
+#define ECHO_PIN 10
 
 /****************************************************** PINS CONFIG END *************************************************************/
 
@@ -33,7 +32,7 @@
 #define SAMPLE_COUNT 5
 
 // Confidence threshold is the minimum confidence to categorize into a color
-#define CONFIDENCE_THRESHOLD 45
+#define CONFIDENCE_THRESHOLD 75
 
 // Sample delay is the delay between samples
 #define SAMPLE_DELAY 1
@@ -41,13 +40,30 @@
 // Minimum brightness is to set a minimum brightness colour
 #define MINIMUM_BRIGHTNESS 500
 
-enum Challenge {
+// MOTOR MOTION CONFIG
+
+#define SET_SPEED 40
+
+// time it takes to turn 90 degrees
+#define quarterPiTime 820
+
+// ULTRASONIC SENSOR
+
+#define MIN_SONIC_DISTANCE 20.0
+
+// Sample count to be averaged per ultrasonic sensor reading
+#define ULTRA_SAMPLE_SIZE 5
+
+#define ULTRA_SAMPLE_DELAY 10
+
+enum Challenge
+{
   ONE,
   TWO,
   THREE
 };
 
-const Challenge currentChallenge = ONE;
+const Challenge currentChallenge = TWO;
 
 enum color
 {
@@ -56,6 +72,8 @@ enum color
   blue,
   error
 };
+
+Servo myservo;
 
 void setup()
 {
@@ -70,6 +88,8 @@ void setup()
   pinMode(COLOR_S2, OUTPUT);
   pinMode(COLOR_S3, OUTPUT);
   pinMode(COLOR_OUT, INPUT);
+  pinMode(ECHO_PIN, INPUT);
+  pinMode(TRIGGER_PIN, OUTPUT);
 
   Serial.begin(115200); // intialize the serial monitor baud rate
 
@@ -77,21 +97,32 @@ void setup()
   digitalWrite(COLOR_S1, LOW);  // LOW/LOW is off HIGH/LOW is 20% and  LOW/HIGH is  2%
 
   delay(3000);
+
+  myservo.attach(6);
 }
 
 void loop()
 {
-  Serial.println(getEnumColor(getColor()));
+  // Serial.println(getEnumColor(getColor()));
 
-  switch(currentChallenge) {
-    case Challenge::ONE:
-      challengeOne();
-      break;
-    case Challenge::TWO:
-      // challengeTwo();
-      break;
-    case Challenge::THREE:
-      // challengeThree();
-      break;
+  // switch (currentChallenge)
+  // {
+  // case Challenge::ONE:
+  //   challengeOne();
+  //   break;
+  // case Challenge::TWO:
+  //   challengeTwo();
+  //   break;
+  // case Challenge::THREE:
+  //   // challengeThree();
+  //   break;
+  // }
+
+  for (int pos = 180; pos >= 0; pos -= 1)
+  {                     // goes from 180 degrees to 0 degrees
+    myservo.write(pos); // tell servo to go to position in variable 'pos'
+    delay(15);          // waits 15ms for the servo to reach the position
   }
+
+  // Serial.println(getDistance());
 }

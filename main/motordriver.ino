@@ -63,6 +63,18 @@ void turnLeft()
     driveMotor(0, 0);
 }
 
+void drive(){
+    driveMotor(SET_SPEED, SET_SPEED);
+}
+
+void stop(){
+    driveMotor(0, 0);
+}
+
+void reverse(){
+    driveMotor(-SET_SPEED, -SET_SPEED);
+}
+
 // example usage:
 // void loop() {
 //    // put your main code here, to run repeatedly:
