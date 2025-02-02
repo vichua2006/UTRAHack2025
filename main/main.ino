@@ -88,44 +88,18 @@ void setup()
   pinMode(COLOR_S2, OUTPUT);
   pinMode(COLOR_S3, OUTPUT);
   pinMode(COLOR_OUT, INPUT);
-  pinMode(ECHO_PIN, INPUT);
   pinMode(TRIGGER_PIN, OUTPUT);
+  pinMode(ECHO_PIN, INPUT);
 
   Serial.begin(115200); // intialize the serial monitor baud rate
 
   digitalWrite(COLOR_S0, HIGH); // Putting S0/S1 on HIGH/HIGH levels means the output frequency scalling is at 100%  (recommended)
   digitalWrite(COLOR_S1, LOW);  // LOW/LOW is off HIGH/LOW is 20% and  LOW/HIGH is  2%
-
-  delay(3000);
-
-  myservo.attach(6);
+  Serial.begin(9600);
 }
 
 void loop()
 {
-  // Serial.println(getEnumColor(getColor()));
-
-  switch (currentChallenge)
-   {
-   case Challenge::ONE:
-    challengeOne();
-     break;
-  case Challenge::TWO:
-    challengeTwo();
-    break;
-  case Challenge::THREE:
-    // challengeThree();
-    break;
-  }
-
-  /*for (int pos = 180; pos >= 0; pos -= 1)
-  {                     // goes from 180 degrees to 0 degrees
-    myservo.write(pos); // tell servo to go to position in variable 'pos'
-    delay(15);          // waits 15ms for the servo to reach the position
-  }
-
-  */
-
-
-  // Serial.println(getDistance());
+  Serial.println(getEnumColor(getColor()));
+  delay(10);
 }
