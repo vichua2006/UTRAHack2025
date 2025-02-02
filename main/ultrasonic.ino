@@ -1,4 +1,3 @@
-
 void setupUltrasonic() {
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);

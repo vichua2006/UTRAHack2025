@@ -1,15 +1,4 @@
 
-const int quarterPiTime = 660;
-
-void setupMotorPins() {
-  // put your setup code here, to run once:
-  pinMode(enL, OUTPUT);
-  pinMode(in1, OUTPUT);
-  pinMode(in2, OUTPUT);
-  pinMode(enR, OUTPUT);
-  pinMode(in3, OUTPUT);
-  pinMode(in4, OUTPUT);
-}
 void driveMotor(int speedA, int speedB) {
     speedA = constrain(speedA, -100, 100);
     speedB = constrain(speedB, -100, 100);
