@@ -1,7 +1,4 @@
-const int speed = 45;
-const int turnSpeed = 30;
-
-const int turnBackTimeOffset = 1000;
+const int turnBackTimeOffset = 900;
 
 enum class ChallengeOneState
 {
@@ -30,7 +27,9 @@ void challengeOne()
   switch (challengeOneState)
   {
   case (ChallengeOneState::TARGET_SEARCH):
-    driveMotor(speed, speed);
+    drive();
+
+    closeGripper();
 
     if (isColorFound())
     {
@@ -57,7 +56,7 @@ void challengeOne()
 
     while (colorChanges < 3)
     {
-      driveMotor(turnSpeed, -turnSpeed);
+      driveMotor(TURN_SPEED, -TURN_SPEED);
       while (getColor() == currentColor)
       {
         Serial.println("Swapping colors --- on:");
@@ -94,7 +93,7 @@ void challengeOne()
 
     while ((millis() - startTime) < centerTime)
     {
-      driveMotor(-turnSpeed, turnSpeed);
+      driveMotor(-TURN_SPEED, TURN_SPEED);
       Serial.print("Spinning to center + ");
       Serial.print(millis());
       Serial.print(" + StartTime: ");
@@ -114,13 +113,13 @@ void challengeOne()
     break;
   case (ChallengeOneState::MOVE_TO_CENTER):
     // Move towards and stop at the center
-    driveMotor(speed, speed);
+    driveMotor(DRIVE_SPEED, DRIVE_SPEED);
 
     colorChanges = 0;
 
     currentColor = getColor();
 
-    while (colorChanges < 6)
+    while (colorChanges < 5)
     {
       while (getColor() == currentColor)
       {

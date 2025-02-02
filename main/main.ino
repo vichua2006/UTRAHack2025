@@ -11,7 +11,7 @@
 
 // MOTOR DRIVER:
 
-#define modifierL 0.886
+#define modifierL 1
 #define modifierR 1
 #define enL 7  // 8
 #define in1 4  // 5
@@ -45,10 +45,11 @@
 
 // MOTOR MOTION CONFIG
 
-#define SET_SPEED 40
+#define DRIVE_SPEED 35
+#define TURN_SPEED 30
 
 // time it takes to turn 90 degrees
-#define quarterPiTime 820
+#define quarterPiTime 437 // 570
 
 // ULTRASONIC SENSOR
 
@@ -100,7 +101,6 @@ void setup()
   pinMode(COLOR_S3, OUTPUT);
   pinMode(COLOR_OUT, INPUT);
   pinMode(TRIGGER_PIN, OUTPUT);
-  pinMode(LED_BUILTIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 
   Serial.begin(115200); // intialize the serial monitor baud rate
@@ -111,25 +111,24 @@ void setup()
   setupServo();
   defaultGripper();
   
-  Serial.begin(9600);
-
-  
+  delay(2000);
 }
 
 void loop()
 {
-  //Serial.println(getEnumColor(getColor()));
+  // Serial.println(getEnumColor(getColor()));
+  // Serial.print("Dist FROM MAIN: ");
+  // Serial.println(getDistance());
 
   switch(currentChallenge) {
     case Challenge::ONE:
       challengeOne();
       break;
     case Challenge::TWO:
-      challengeTwo();
-      //Serial.println(getDistance());
+      challengeTwo(1);
       break;
     case Challenge::THREE:
-      challengeThree();
+      // challengeThree();
       break;
     case Challenge::TEST:
       testCode();

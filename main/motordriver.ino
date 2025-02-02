@@ -64,7 +64,7 @@ void turnLeft()
 }
 
 void drive(){
-    driveMotor(SET_SPEED, SET_SPEED);
+    driveMotor(DRIVE_SPEED, DRIVE_SPEED);
 }
 
 void turnInfinite() {
@@ -73,21 +73,23 @@ void turnInfinite() {
 }
 
 void stop(){
+    driveMotor(-DRIVE_SPEED, -DRIVE_SPEED);
+    delay(50);
     driveMotor(0, 0);
 }
 
 void reverse(){
-    driveMotor(-SET_SPEED, -SET_SPEED);
+    driveMotor(-DRIVE_SPEED, -DRIVE_SPEED);
 }
 
 void drive_slow(char direction) {
   if (direction == 'L') {
-    driveMotor(-1 * SET_SPEED * 3 / 4, SET_SPEED * 3 / 4);
+    driveMotor(-1 * DRIVE_SPEED * 3 / 4, DRIVE_SPEED * 3 / 4);
     delay(100);
     driveMotor(0,0);
   }
   else if (direction == 'R') {
-    driveMotor(SET_SPEED * 3 / 4, -1 * SET_SPEED * 3 / 4);
+    driveMotor(DRIVE_SPEED * 3 / 4, -1 * DRIVE_SPEED * 3 / 4);
     delay(100);
     driveMotor(0,0);
   }
@@ -99,12 +101,12 @@ void drive_slow(char direction) {
 
 void drive_sweep(char direction) {
   if (direction == 'L') {
-    driveMotor(-1 * SET_SPEED * 3 / 4, SET_SPEED * 3 / 4);
+    driveMotor(-1 * DRIVE_SPEED * 3 / 4, DRIVE_SPEED * 3 / 4);
     delay(500);
     driveMotor(0,0);
   }
   else if (direction == 'R') {
-    driveMotor(SET_SPEED * 3 / 4, -1 * SET_SPEED * 3 / 4);
+    driveMotor(DRIVE_SPEED * 3 / 4, -1 * DRIVE_SPEED * 3 / 4);
     delay(500);
     driveMotor(0,0);
   }

@@ -5,7 +5,7 @@ void setupServo() {
 }
 
 void openGripper() {
-    servo.write(20);
+    servo.write(0); // 20
 }
 
 void closeGripper() {

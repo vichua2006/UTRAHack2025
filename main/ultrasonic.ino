@@ -54,9 +54,8 @@ void calibrate() {
 
 float sweep() {
   drive_sweep('L');
-  delay(100);
   float min_dist = getDistance();
-  for (int i = 0; i < 30; i++) {
+  for (int i = 0; i < 12; i++) {
     drive_slow('R');
     float temp = getDistance();
     if (temp < min_dist) {
@@ -72,12 +71,11 @@ char swap_direction(char direction) {
 }
 
 void sweep_calibrate() {
-  float target_dist = sweep() + 0.15;
-  Serial.print("Hello");
+  float target_dist = sweep() + 0.20;
   float prev = getDistance();
   float current;
   char direction = 'L';
-  for (int i = 0; i < 15; i++) {
+  for (int i = 0; i < 10; i++) {
     drive_slow(direction);
     current = getDistance();
     if (current < target_dist) {
