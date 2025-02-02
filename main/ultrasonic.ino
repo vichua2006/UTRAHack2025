@@ -1,6 +1,3 @@
-#define TRIGGER_PIN 9;
-#define ECHO_PIN 10;
-
 void setupUltrasonic() {
   pinMode(TRIGGER_PIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);

@@ -6,13 +6,27 @@ enum class ChallengeOneState
   DONE
 };
 
+
+unsigned long startTime = 0;
+
+unsigned long timestampOne = 0;
+unsigned long timestampTwo = 0;
+
+int colorChanges = 0;
+
+int centerTime = 0;
+
+color currentColor;
+
+
+
 ChallengeOneState challengeOneState = ChallengeOneState::TARGET_SEARCH;
 
 void challengeOne()
 {
   switch (challengeOneState)
   {
-    case ChallengeOneState::TARGET_SEARCH:
+    case (ChallengeOneState::TARGET_SEARCH):
       driveMotor(10, 10);
 
       if(isColorFound())
@@ -20,17 +34,17 @@ void challengeOne()
         challengeOneState = ChallengeOneState::FIND_CENTER_ANGLE;
       }
       break;
-    case ChallengeOneState::FIND_CENTER_ANGLE:
+    case (ChallengeOneState::FIND_CENTER_ANGLE):
       // Rotate around the robot's axis and record where the edges of the circle are
       // to find out where the center of the circle is
-      unsigned long startTime = millis();
+      startTime = millis();
 
-      unsigned long timestampOne = 0;
-      unsigned long timestampTwo = 0;
+      timestampOne = 0;
+      timestampTwo = 0;
 
-      int colorChanges = 0;
+      colorChanges = 0;
 
-      Color currentColor = getColor();
+      currentColor = getColor();
 
       while(colorChanges < 3) {
         driveMotor(5, -5);
@@ -49,7 +63,7 @@ void challengeOne()
       driveMotor(0, 0);
 
       // Calculate the center angle
-      int centerTime = (timestampTwo - timestampOne) / 2;
+      centerTime = (timestampTwo - timestampOne) / 2;
       
       startTime = millis();
 
@@ -61,13 +75,13 @@ void challengeOne()
 
       challengeOneState = ChallengeOneState::MOVE_TO_CENTER;
       break;
-    case ChallengeOneState::MOVE_TO_CENTER:
+    case (ChallengeOneState::MOVE_TO_CENTER):
       // Move towards and stop at the center
       driveMotor(10, 10);
 
-      int colorChanges = 0;
+      colorChanges = 0;
 
-      Color currentColor = getColor();
+      currentColor = getColor();
 
       while(colorChanges < 4) {
         while(getColor() == currentColor) {}
