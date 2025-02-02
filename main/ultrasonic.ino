@@ -1,7 +1,3 @@
-void setupUltrasonic() {
-  pinMode(TRIGGER_PIN, OUTPUT);
-  pinMode(ECHO_PIN, INPUT);
-}
 
 int getDistance() {
   digitalWrite(TRIGGER_PIN, LOW);
