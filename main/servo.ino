@@ -9,5 +9,9 @@ void openGripper() {
 }
 
 void closeGripper() {
-    servo.write(45);
+    servo.write(55); // 45
+}
+
+void defaultGripper() {
+    servo.write(40);
 }

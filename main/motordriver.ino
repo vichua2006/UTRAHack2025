@@ -67,6 +67,11 @@ void drive(){
     driveMotor(SET_SPEED, SET_SPEED);
 }
 
+void turnInfinite() {
+  int turnSpeed = -50;
+  driveMotor(turnSpeed, -1 * (turnSpeed));
+}
+
 void stop(){
     driveMotor(0, 0);
 }

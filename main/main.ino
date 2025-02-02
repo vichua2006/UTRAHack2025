@@ -109,6 +109,7 @@ void setup()
   digitalWrite(COLOR_S1, LOW);  // LOW/LOW is off HIGH/LOW is 20% and  LOW/HIGH is  2%
 
   setupServo();
+  defaultGripper();
   
   Serial.begin(9600);
 
