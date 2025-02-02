@@ -100,6 +100,7 @@ void setup()
   pinMode(COLOR_S3, OUTPUT);
   pinMode(COLOR_OUT, INPUT);
   pinMode(TRIGGER_PIN, OUTPUT);
+  pinMode(LED_BUILTIN, OUTPUT);
   pinMode(ECHO_PIN, INPUT);
 
   Serial.begin(115200); // intialize the serial monitor baud rate
@@ -127,7 +128,7 @@ void loop()
       //Serial.println(getDistance());
       break;
     case Challenge::THREE:
-      // challengeThree();
+      challengeThree();
       break;
     case Challenge::TEST:
       testCode();
