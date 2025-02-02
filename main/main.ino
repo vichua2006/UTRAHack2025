@@ -30,13 +30,16 @@
 // COLOR SENSOR CONFIG
 
 // Sample count is the amount of samples to be averaged per sensor reading (used in getColor)
-#define SAMPLE_COUNT 10
+#define SAMPLE_COUNT 5
 
 // Confidence threshold is the minimum confidence to categorize into a color
-#define CONFIDENCE_THRESHOLD 30
+#define CONFIDENCE_THRESHOLD 45
 
 // Sample delay is the delay between samples
-#define SAMPLE_DELAY 3
+#define SAMPLE_DELAY 1
+
+// Minimum brightness is to set a minimum brightness colour
+#define MINIMUM_BRIGHTNESS 500
 
 enum Challenge {
   ONE,
@@ -68,16 +71,17 @@ void setup()
   pinMode(COLOR_S3, OUTPUT);
   pinMode(COLOR_OUT, INPUT);
 
-  Serial.begin(9600); // intialize the serial monitor baud rate
+  Serial.begin(115200); // intialize the serial monitor baud rate
 
   digitalWrite(COLOR_S0, HIGH); // Putting S0/S1 on HIGH/HIGH levels means the output frequency scalling is at 100%  (recommended)
   digitalWrite(COLOR_S1, LOW);  // LOW/LOW is off HIGH/LOW is 20% and  LOW/HIGH is  2%
-  Serial.begin(9600);
+
+  delay(3000);
 }
 
 void loop()
 {
-  Serial.println(getEnumColor(getColor()));
+  // Serial.println(getEnumColor(getColor()));
 
   switch(currentChallenge) {
     case Challenge::ONE:

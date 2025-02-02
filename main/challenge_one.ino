@@ -1,3 +1,5 @@
+const int speed = 35;
+
 enum class ChallengeOneState
 {
   TARGET_SEARCH,
@@ -24,10 +26,16 @@ void challengeOne()
   switch (challengeOneState)
   {
   case (ChallengeOneState::TARGET_SEARCH):
-    driveMotor(10, 10);
+    driveMotor(speed, speed);
 
     if (isColorFound())
     {
+      Serial.println("Found Circle\n");
+      driveMotor(0, 0);
+      delay(500);
+      driveMotor(-speed, -speed);
+      delay(200);
+      driveMotor(0, 0);
       challengeOneState = ChallengeOneState::FIND_CENTER_ANGLE;
     }
     break;
@@ -45,7 +53,7 @@ void challengeOne()
 
     while (colorChanges < 3)
     {
-      driveMotor(5, -5);
+      driveMotor(speed, -speed);
       while (getColor() == currentColor)
       {
       }
@@ -68,35 +76,42 @@ void challengeOne()
     // Calculate the center angle
     startTime = millis();
 
+    centerTime = (timestampOne - timestampTwo) / 2;
+
     while (millis() - startTime < centerTime)
     {
-      driveMotor(-5, 5);
+      driveMotor(-speed, speed);
     }
 
     driveMotor(0, 0);
 
+    Serial.println("Found Center Angle\n");
     challengeOneState = ChallengeOneState::MOVE_TO_CENTER;
     break;
   case (ChallengeOneState::MOVE_TO_CENTER):
     // Move towards and stop at the center
-    driveMotor(10, 10);
+    driveMotor(speed, speed);
 
     colorChanges = 0;
 
     currentColor = getColor();
 
-    while (colorChanges < 4)
+    while (colorChanges < 6)
     {
       while (getColor() == currentColor)
       {
       }
 
+      Serial.println("Color changes: ");
+      Serial.println(colorChanges);
+      Serial.println("\n");
       currentColor = getColor();
       colorChanges++;
     }
 
     driveMotor(0, 0);
 
+    Serial.println("Found Center\n");
     challengeOneState = ChallengeOneState::DONE;
     break;
   case ChallengeOneState::DONE:
