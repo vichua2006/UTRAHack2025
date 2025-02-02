@@ -1,11 +1,3 @@
-#define SET_SPEED 75
-
-//import stuff?
-
-
-
-
-
 void setup() {
   // put your setup code here, to run once:
 

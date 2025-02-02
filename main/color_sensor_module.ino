@@ -1,11 +1,3 @@
-
-// PINS:
-#define  s0 8 // 8       //Module pins wiring
-#define s1 2 // 9
-#define s2 3 //10
-#define s3 4 //11 
-#define  out 13 //12
-
 // Sample count is the amount of samples to be averaged per sensor reading (used in getColor)
 #define SAMPLE_COUNT 10
 

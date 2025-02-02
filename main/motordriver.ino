@@ -1,12 +1,3 @@
-#define modifierL 0.886
-#define modifierR 1
-
-int enL= 8;
-int in1= 5;
-int in2 = 6;
-int enR= 12;
-int in3=11;
-int in4=7;
 
 const int quarterPiTime = 660;
 
