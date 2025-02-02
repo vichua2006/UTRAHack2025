@@ -8,6 +8,7 @@ enum class ChallengeOneState
   TARGET_SEARCH,
   FIND_CENTER_ANGLE,
   MOVE_TO_CENTER,
+  DROPPER,
   DONE
 };
 
@@ -132,13 +133,21 @@ void challengeOne()
       colorChanges++;
     }
 
-    driveMotor(0, 0);
-
     Serial.println("Found Center\n");
+    challengeOneState = ChallengeOneState::DROPPER;
+    break;
+  case ChallengeOneState::DROPPER:
+    // Stop the robot
+    stop();
+    delay(500);
+    reverse();
+    delay(200);
+    stop();
+    delay(400);
+    openGripper();
     challengeOneState = ChallengeOneState::DONE;
     break;
   case ChallengeOneState::DONE:
-    // Stop the robot
     driveMotor(0, 0);
     break;
   }

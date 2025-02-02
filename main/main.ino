@@ -59,7 +59,7 @@
 
 #define ULTRA_SAMPLE_DELAY 20
 
-#define CALIBRATION true
+#define DISTANCE_THRESHOLD 21
 
 enum Challenge
 {
@@ -69,7 +69,7 @@ enum Challenge
   TEST
 };
 
-const Challenge currentChallenge = TWO;
+const Challenge currentChallenge = ONE;
 
 enum color
 {
