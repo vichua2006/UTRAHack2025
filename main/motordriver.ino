@@ -1,9 +1,6 @@
-
-#ifndef MOTORDRIVER_h
-
-#define MOTORDRIVER_h
 #define modifierL 0.886
 #define modifierR 1
+
 int enL= 8;
 int in1= 5;
 int in2 = 6;
@@ -11,7 +8,7 @@ int enR= 12;
 int in3=11;
 int in4=7;
 
-const tenRotationtime = 
+const int quarterPiTime = 660;
 
 void setupMotorPins() {
   // put your setup code here, to run once:
@@ -60,7 +57,7 @@ void turnRight(){
     int turnSpeed = 50;
     driveMotor(turnSpeed, -1 * (turnSpeed));
     // around how long it takes to turn 90 degrees
-    delay(660);
+    delay(quarterPiTime);
     driveMotor(0, 0);
 }
 
@@ -69,7 +66,7 @@ void turnLeft(){
     int turnSpeed = -50;
     driveMotor(turnSpeed, -1 * (turnSpeed));
     // around how long it takes to turn 90 degrees
-    delay(660);
+    delay(quarterPiTime);
     driveMotor(0, 0);
 }
 
@@ -79,6 +76,3 @@ void turnLeft(){
 //     driveMotor(50,50);
 //     delay(2000);
 // }
-
-
-#endif
