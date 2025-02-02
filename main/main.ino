@@ -11,21 +11,19 @@
 
 #define modifierL 0.886
 #define modifierR 1
-const int enL = 7;  // 8
-const int in1 = 4;  // 5
-const int in2 = 2;  // 6
-const int enR = 13; // 12
-const int in3 = A0; // 11
-const int in4 = A1; // 7
+#define enL 7  // 8
+#define in1 4  // 5
+#define in2 2  // 6
+#define enR 13 // 12
+#define in3 A0 // 11
+#define in4 A1 // 7
 
-const int quarterPiTime = 660; // time it takes to turn 90 degrees
+#define quarterPiTime 660 // time it takes to turn 90 degrees
 
 // ULTRASONIC CENTIMETER
 
 #define TRIGGER_PIN 5
 #define ECHO_PIN 6
-
-//
 
 /****************************************************** PINS CONFIG END *************************************************************/
 
@@ -39,6 +37,14 @@ const int quarterPiTime = 660; // time it takes to turn 90 degrees
 
 // Sample delay is the delay between samples
 #define SAMPLE_DELAY 3
+
+enum Challenge {
+  ONE,
+  TWO,
+  THREE
+};
+
+const Challenge currentChallenge = ONE;
 
 enum color
 {
@@ -72,4 +78,16 @@ void setup()
 void loop()
 {
   Serial.println(getEnumColor(getColor()));
+
+  switch(currentChallenge) {
+    case Challenge::ONE:
+      challengeOne();
+      break;
+    case Challenge::TWO:
+      // challengeTwo();
+      break;
+    case Challenge::THREE:
+      // challengeThree();
+      break;
+  }
 }
