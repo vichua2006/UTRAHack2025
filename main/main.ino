@@ -81,7 +81,7 @@ void setup()
 
 void loop()
 {
-  // Serial.println(getEnumColor(getColor()));
+  Serial.println(getEnumColor(getColor()));
 
   switch(currentChallenge) {
     case Challenge::ONE:

@@ -1,4 +1,7 @@
-const int speed = 35;
+const int speed = 45;
+const int turnSpeed = 30;
+
+const int turnBackTimeOffset = 1000;
 
 enum class ChallengeOneState
 {
@@ -33,8 +36,8 @@ void challengeOne()
       Serial.println("Found Circle\n");
       driveMotor(0, 0);
       delay(500);
-      driveMotor(-speed, -speed);
-      delay(200);
+      driveMotor(-30, -30);
+      while(getColor() != error) {}
       driveMotor(0, 0);
       challengeOneState = ChallengeOneState::FIND_CENTER_ANGLE;
     }
@@ -53,18 +56,22 @@ void challengeOne()
 
     while (colorChanges < 3)
     {
-      driveMotor(speed, -speed);
+      driveMotor(turnSpeed, -turnSpeed);
       while (getColor() == currentColor)
       {
+        Serial.println("Swapping colors --- on:");
+        Serial.println(currentColor);
+        Serial.println("\n");
+        Serial.println(getEnumColor(getColor()));
       }
 
       if (colorChanges == 1)
       {
-        timestampOne = millis() - startTime;
+        timestampOne = millis();
       }
       else if (colorChanges == 2)
       {
-        timestampTwo = millis() - startTime;
+        timestampTwo = millis();
       }
 
       currentColor = getColor();
@@ -76,11 +83,27 @@ void challengeOne()
     // Calculate the center angle
     startTime = millis();
 
-    centerTime = (timestampOne - timestampTwo) / 2;
+    centerTime = ((timestampTwo - timestampOne) / 2) + turnBackTimeOffset;
+    Serial.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ONE: ");
+    Serial.print(timestampOne);
+    Serial.print(" --- Two: ");
+    Serial.print(timestampTwo);
+    Serial.println("\n");
+    delay(500);
 
-    while (millis() - startTime < centerTime)
+    while ((millis() - startTime) < centerTime)
     {
-      driveMotor(-speed, speed);
+      driveMotor(-turnSpeed, turnSpeed);
+      Serial.print("Spinning to center + ");
+      Serial.print(millis());
+      Serial.print(" + StartTime: ");
+      Serial.print(startTime);
+      Serial.print(" --- centerTime: ");
+      Serial.print(centerTime);
+      Serial.print(" --- Difference: ");
+      Serial.print((millis() - startTime));
+      Serial.println("\n");
+      Serial.println(getEnumColor(getColor()));
     }
 
     driveMotor(0, 0);
