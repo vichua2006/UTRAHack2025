@@ -5,6 +5,7 @@ int challengeTwo()
 {
 
     drive();
+    
     while (1)
     {
 
@@ -15,6 +16,7 @@ int challengeTwo()
         {
             Serial.println("stopped");
             reverse();
+            calibrate();
             delay(50);
             stop();
             delay(2000);
@@ -58,3 +60,28 @@ int challengeTwo()
         }
     }
 }
+
+bool getting_closer(char direction) {
+  float previous = getDistance();
+  drive_slow(direction);
+  float current = getDistance();
+  Serial.print(previous);
+  Serial.print("   ");Serial.print(direction);Serial.print("   ");
+  Serial.println(current);
+  return (current - previous) < 0;
+  
+  
+}
+
+void calibrate() {
+  char direction = 'L';
+  int switch_dir = 0;
+  for (int i = 0; i < 10; i++) {
+    if (!getting_closer(direction)) {
+      if (direction == 'L') direction = 'R';
+      else direction = 'L';
+    }
+  }
+}
+
+

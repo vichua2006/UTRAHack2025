@@ -54,7 +54,7 @@
 // Sample count to be averaged per ultrasonic sensor reading
 #define ULTRA_SAMPLE_SIZE 5
 
-#define ULTRA_SAMPLE_DELAY 10
+#define ULTRA_SAMPLE_DELAY 20
 
 enum Challenge
 {
@@ -105,24 +105,27 @@ void loop()
 {
   // Serial.println(getEnumColor(getColor()));
 
-  // switch (currentChallenge)
-  // {
-  // case Challenge::ONE:
-  //   challengeOne();
-  //   break;
-  // case Challenge::TWO:
-  //   challengeTwo();
-  //   break;
-  // case Challenge::THREE:
-  //   // challengeThree();
-  //   break;
-  // }
+  switch (currentChallenge)
+   {
+   case Challenge::ONE:
+    challengeOne();
+     break;
+  case Challenge::TWO:
+    challengeTwo();
+    break;
+  case Challenge::THREE:
+    // challengeThree();
+    break;
+  }
 
-  for (int pos = 180; pos >= 0; pos -= 1)
+  /*for (int pos = 180; pos >= 0; pos -= 1)
   {                     // goes from 180 degrees to 0 degrees
     myservo.write(pos); // tell servo to go to position in variable 'pos'
     delay(15);          // waits 15ms for the servo to reach the position
   }
+
+  */
+
 
   // Serial.println(getDistance());
 }

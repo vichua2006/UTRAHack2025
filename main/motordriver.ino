@@ -75,6 +75,23 @@ void reverse(){
     driveMotor(-SET_SPEED, -SET_SPEED);
 }
 
+void drive_slow(char direction) {
+  if (direction == 'L') {
+    driveMotor(-40, 40);
+    delay(100);
+    driveMotor(0,0);
+  }
+  else if (direction == 'R') {
+    driveMotor(40, -40);
+    delay(100);
+    driveMotor(0,0);
+  }
+  else {
+    Serial.println("INVALID DIRECTION");
+    delay(200);
+  }
+}
+
 // example usage:
 // void loop() {
 //    // put your main code here, to run repeatedly:
