@@ -10,8 +10,6 @@ int getData(int samples)
   return data / samples;
 }
 
-
-
 // Produces the color detected as a color enum.
 enum color getColor()
 {
