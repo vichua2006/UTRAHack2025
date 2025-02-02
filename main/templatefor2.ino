@@ -62,4 +62,45 @@ int challengeTwo()
     }
 }
 
+void reorient(){
+  // Reorients robot to 90 degrees
+  driveMotor(0, 0);
+  delay(500);
+  color currentColor = getColor();
+  driveMotor(-30, -30);
+  while(getColor() == currentColor) {}
+  driveMotor(0, 0);
+
+  startTime = millis();
+
+  unsigned long timestampOne;
+  unsigned long timestampTwo;
+
+  int colorChanges = 0;
+
+  currentColor = getColor();
+
+  while(getColor() == currentColor) driveMotor(speed, -speed);
+  timestampOne = millis();
+  currentColor = getColor();
+  driveMotor(0, 0);
+
+  while(getColor() == currentColor) driveMotor(-speed, speed);
+  timestampTwo = millis();
+  driveMotor(0, 0);
+
+  // Calculate the center angle
+  startTime = millis();
+
+  centerTime = (timestampTwo - timestampOne) / 2;
+
+  while ((millis() - startTime) < centerTime + turnBackTimeOffset)
+  {
+    driveMotor(speed, -speed);
+  }
+
+  driveMotor(0, 0);
+  
+  return;
+}
 
