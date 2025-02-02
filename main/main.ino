@@ -101,5 +101,16 @@ void setup()
 void loop()
 {
   Serial.println(getEnumColor(getColor()));
-  delay(10);
+
+  switch(currentChallenge) {
+    case Challenge::ONE:
+      challengeOne();
+      break;
+    case Challenge::TWO:
+      // challengeTwo();
+      break;
+    case Challenge::THREE:
+      // challengeThree();
+      break;
+  }
 }
