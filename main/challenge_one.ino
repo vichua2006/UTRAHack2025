@@ -1,5 +1,5 @@
-const int speed = 45;
-const int turnSpeed = 30;
+const int speed = 65;
+const int turnSpeed = 45;
 
 const int turnBackTimeOffset = 1000;
 
@@ -17,6 +17,7 @@ unsigned long timestampOne = 0;
 unsigned long timestampTwo = 0;
 
 int colorChanges = 0;
+int layerChanges = 0;
 
 unsigned long centerTime = 0;
 
@@ -37,8 +38,11 @@ void challengeOne()
       driveMotor(0, 0);
       delay(500);
       driveMotor(-30, -30);
-      while(getColor() != error) {}
+      while (getColor() != error)
+      {
+      }
       driveMotor(0, 0);
+      layerChanges = 0;
       challengeOneState = ChallengeOneState::FIND_CENTER_ANGLE;
     }
     break;
@@ -115,21 +119,26 @@ void challengeOne()
     // Move towards and stop at the center
     driveMotor(speed, speed);
 
-    colorChanges = 0;
+    currentColor = getColor();
+
+    while (getColor() == currentColor)
+    {
+    }
 
     currentColor = getColor();
 
-    while (colorChanges < 6)
+    while (layerChanges < 4)
     {
       while (getColor() == currentColor)
       {
       }
 
+      challengeOneState = ChallengeOneState::FIND_CENTER_ANGLE;
       Serial.println("Color changes: ");
       Serial.println(colorChanges);
       Serial.println("\n");
       currentColor = getColor();
-      colorChanges++;
+      layerChanges++;
     }
 
     driveMotor(0, 0);
