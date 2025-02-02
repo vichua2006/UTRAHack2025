@@ -73,6 +73,13 @@ enum color
   error
 };
 
+enum turn {
+  straight,
+  left,
+  right,
+  oneeighty
+};
+
 Servo myservo;
 
 void setup()

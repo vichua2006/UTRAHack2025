@@ -71,7 +71,7 @@ char swap_direction(char direction) {
 }
 
 void sweep_calibrate() {
-  float target_dist = sweep() + 0.10;
+  float target_dist = sweep() + 0.20;
   float prev = getDistance();
   float current;
   char direction = 'L';
