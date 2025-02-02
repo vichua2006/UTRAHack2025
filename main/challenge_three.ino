@@ -1,9 +1,11 @@
 const float MIN_WALL_WIDTH = 10.0;
+const enum color path[] {red,green,blue,green,blue};
+const int pathSize = 5;
 
-void challengeThree(color path[], int size) {
+void challengeThree() {
   int pathIndex = 0;
   
-  while(pathIndex < size) {
+  while(pathIndex < pathSize) {
     color currentColor = getColor();
     if(currentColor == path[pathIndex]) {
       driveMotor(0, 0);
