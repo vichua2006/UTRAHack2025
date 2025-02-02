@@ -10,8 +10,6 @@ int getData(int samples)
   return data / samples;
 }
 
-
-
 // Produces the color detected as a color enum.
 enum color getColor()
 {
@@ -30,7 +28,7 @@ enum color getColor()
   if (redVal < greenVal && redVal < blueVal)
   {
     int confidence = min(abs(greenVal - redVal), abs(blueVal - redVal));
-    if (confidence >= CONFIDENCE_THRESHOLD)
+    if (confidence >= CONFIDENCE_THRESHOLD && redVal <= MINIMUM_BRIGHTNESS)
       return red;
     else
       return error;
@@ -38,7 +36,7 @@ enum color getColor()
   else if (greenVal < redVal && greenVal < blueVal)
   {
     int confidence = min(abs(redVal - greenVal), abs(blueVal - greenVal));
-    if (confidence >= CONFIDENCE_THRESHOLD)
+    if (confidence >= CONFIDENCE_THRESHOLD && greenVal <= MINIMUM_BRIGHTNESS)
       return green;
     else
       return error;
@@ -46,7 +44,7 @@ enum color getColor()
   else if (blueVal < greenVal && blueVal < redVal)
   {
     int confidence = min(abs(redVal - blueVal), abs(greenVal - blueVal));
-    if (confidence >= CONFIDENCE_THRESHOLD)
+    if (confidence >= CONFIDENCE_THRESHOLD && blueVal <= MINIMUM_BRIGHTNESS)
       return blue;
     else
       return error;
