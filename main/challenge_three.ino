@@ -60,3 +60,21 @@
 // void challengeThree(){
 //   return;
 // }
+
+void challengeThree(color path[], int size){
+  while(getDistance() < MIN_SONIC_DISTANCE) turnLeft();
+
+  for(int i = 0; i < size; i++){
+    while(getColor() != path[i]){
+      driveMotor(DRIVE_SPEED, DRIVE_SPEED);
+      if(getDistance() < MIN_SONIC_DISTANCE){
+        turnLeft(); turnLeft();
+      }
+    }
+
+    driveMotor(0,0);
+    delay(500);
+    ledBlink();
+    delay(500);
+  }
+}
