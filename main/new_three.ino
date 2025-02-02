@@ -2,6 +2,9 @@ char time_arr[3600];
 
 char rand_turn_arr[] = {2, 1, 3, 3, 1, 2, 1, 3, 1, 2, 3, 2, 3, 1, 2, 1, 3, 2, 1, 3, 2, 3, 1, 3, 2, 1, 1, 3, 2, 1, 3, 2, 3, 1, 2, 1, 3, 2, 3, 1, 1, 2, 3, 3, 2, 1, 3, 2, 1, 3, 2, 1, 3, 1, 2, 3, 1, 2, 3, 1, 2, 1, 3, 1, 3, 2, 3, 1, 2, 3, 1, 2, 1, 3, 3, 1, 2, 3, 1, 3, 1, 2, 2, 1, 3, 1, 3, 2, 1, 3, 2, 3, 1, 2, 3, 1, 3, 2, 1, 2, 1, 3, 2, 1};
 
+//colour colour turn turn time time time time
+
+
 char add_colour(char frame, color colour) {
   if (colour == red) { //red stored as 11
     frame += 192;
@@ -49,10 +52,10 @@ char add_turn_type(char frame, turn turn) {
 
 int ret_drive_time(char frame) {
   int sections = frame % 16;
-  return sections * 50;
+  return sections * 50; //in milliseconds
 }
 
-char add_drive_time(char frame, int time) {
+char add_drive_time(char frame, int time) { 
   int pixelized = time + 50;
   frame += pixelized / 50;
   return frame;
