@@ -16,7 +16,8 @@ int challengeTwo()
         {
             Serial.println("stopped");
             reverse();
-            calibrate();
+            //calibrate();
+            sweep_calibrate();
             delay(50);
             stop();
             delay(2000);
