@@ -18,6 +18,8 @@ const int enR= 13; //12
 const int in3= A0; //11
 const int in4= A1; //7
 
+const int quarterPiTime = 660; // time it takes to turn 90 degrees
+
 // ULTRASONIC CENTIMETER
 
 

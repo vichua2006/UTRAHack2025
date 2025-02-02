@@ -14,7 +14,7 @@ unsigned long timestampTwo = 0;
 
 int colorChanges = 0;
 
-int centerTime = 0;
+unsigned long centerTime = 0;
 
 color currentColor;
 
@@ -63,8 +63,6 @@ void challengeOne()
       driveMotor(0, 0);
 
       // Calculate the center angle
-      centerTime = (timestampTwo - timestampOne) / 2;
-      
       startTime = millis();
 
       while(millis() - startTime < centerTime) {
