@@ -1,5 +1,4 @@
-const float MIN_WALL_WIDTH = 100.0;
-const float COURSE_SIZE = 1500.0;
+const float MIN_WALL_WIDTH = 10.0;
 
 void challengeThree(color path[], int size) {
   int pathIndex = 0;
