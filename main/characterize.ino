@@ -19,8 +19,10 @@ DrivingState drivingState = STOP;
 
 void characterize()
 {
+  timeSave();
     while (Serial.available())
     {
+      timeSave();
         input = Serial.readString();
 
         if (input[0] == 'f')
@@ -56,6 +58,10 @@ void characterize()
             {
                 tunableDriveSpeed = input.substring(1).toInt();
             }
+        }
+        else if (input[0] == 'c')
+        {
+            Serial.println(get());
         }
     }
 

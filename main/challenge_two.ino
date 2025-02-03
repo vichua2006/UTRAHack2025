@@ -31,6 +31,7 @@ void setChallengeTwoState(enum ChallengeTwoState state) {
 }
 
 void challengeTwo(int def) {
+  timeSave();
     switch(challengeTwoState) {
         case ChallengeTwoState::INIT:
             drive();

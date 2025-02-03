@@ -24,6 +24,7 @@ ChallengeOneState challengeOneState = ChallengeOneState::TARGET_SEARCH;
 
 void challengeOne()
 {
+  timeSave();
   switch (challengeOneState)
   {
   case (ChallengeOneState::TARGET_SEARCH):

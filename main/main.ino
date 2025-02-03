@@ -1,4 +1,5 @@
 #include <Servo.h>
+#include <EEPROM.h>
 
 // PINS:
 
@@ -65,6 +66,10 @@
 
 #define DISTANCE_THRESHOLD 21
 
+#define COMPENSATION_ADDRESS 0
+
+#define IS_NEW_BATTERY 1
+
 enum Challenge
 {
   ONE,
@@ -75,6 +80,10 @@ enum Challenge
 };
 
 const Challenge currentChallenge = CHAR;
+
+unsigned int time = millis();
+unsigned int old;
+int oldt;
 
 enum color
 {
@@ -121,6 +130,9 @@ void setup()
   setupServo();
   defaultGripper();
 
+  if(IS_NEW_BATTERY) writeIntIntoEEPROM(0);
+  old = get();
+  oldt = 
   delay(2000);
 }
 
@@ -148,4 +160,6 @@ void loop()
     characterize();
     break;
   }
+
+
 }

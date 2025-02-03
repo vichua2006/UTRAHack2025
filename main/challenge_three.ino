@@ -4,7 +4,7 @@ const int pathSize = 5;
 
 void challengeThree() {
   int pathIndex = 0;
-  
+  timeSave();
   while(pathIndex < pathSize) {
     color currentColor = getColor();
     if(currentColor == path[pathIndex]) {
@@ -14,6 +14,7 @@ void challengeThree() {
       delay(200);
       pathIndex++;
     }
+    timeSave();
     
     float frontDist = getDistance();
     
